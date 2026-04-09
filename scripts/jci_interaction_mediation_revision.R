@@ -94,6 +94,12 @@ interaction_truth <- function(
   )
 }
 
+make_zero_padded_jacobian <- function(effect_names, theta) {
+  # Build the Jacobian directly on the full stacked parameter vector and
+  # leave nuisance coordinates at zero unless an effect depends on them.
+  matrix(0, nrow = length(effect_names), ncol = length(theta), dimnames = list(effect_names, names(theta)))
+}
+
 interaction_effect_table_simple <- function(
   med_obj,
   out_obj,
@@ -128,7 +134,7 @@ interaction_effect_table_simple <- function(
     "ATE" = beta3 + beta2 * gamma + eta * (alpha2 + beta2)
   )
 
-  G <- matrix(0, nrow = length(est), ncol = length(theta), dimnames = list(names(est), NULL))
+  G <- make_zero_padded_jacobian(names(est), theta)
   G["ACME(0)", idxm("T")] <- gamma
   G["ACME(0)", idxo("M")] <- beta2
 
@@ -203,7 +209,7 @@ interaction_effect_table_jobs <- function(
     "ATE" = beta3 + beta2 * gamma + eta * mu1
   )
 
-  G <- matrix(0, nrow = length(est), ncol = length(theta), dimnames = list(names(est), NULL))
+  G <- make_zero_padded_jacobian(names(est), theta)
   G["ACME(0)", idxm("treat")] <- gamma
   G["ACME(0)", idxo("job_seek")] <- beta2
 
