@@ -1,9 +1,0 @@
-"Scenario","Method","SuccessRate"
-"Asymmetric mixture","OLS",1
-"Asymmetric mixture","Semiparametric",0.99
-"Gaussian","OLS",1
-"Gaussian","Semiparametric",1
-"Skew-normal","OLS",1
-"Skew-normal","Semiparametric",1
-"Symmetric bimodal","OLS",1
-"Symmetric bimodal","Semiparametric",1
