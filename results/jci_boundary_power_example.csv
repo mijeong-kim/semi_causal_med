@@ -1,0 +1,3 @@
+"Scenario","SampleSize","Effect","Truth","beta2","gamma","eta","Method","MeanEstimate","RejectZero","AvgLength"
+"Asymmetric mixture",220,"ACME(0)",-0.0676,0.26,-0.26,0.8,"OLS",-0.0676664486409624,0.183,0.178065721866198
+"Asymmetric mixture",220,"ACME(0)",-0.0676,0.26,-0.26,0.8,"Semiparametric",-0.0673188832782513,1,0.0438956371907997
