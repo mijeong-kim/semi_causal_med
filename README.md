@@ -1,34 +1,23 @@
-# Semiparametric Causal Mediation Analysis: R Code
+# Semiparametric Causal Mediation Analysis for Linear Models with Non-Gaussian Errors
 
-This repository is intended as a code release for the semiparametric causal mediation project.
+This repository contains the code, derived results, and manuscript files for the Statistics in Medicine submission
 
-GitHub repository: https://github.com/mijeong-kim/semi_causal_med
+`Semiparametric Causal Mediation Analysis for Linear Models with Non-Gaussian Errors: Applications to Drug Treatment and Social Program Evaluation`.
 
-The public GitHub version contains R code only. Manuscript source files and compiled PDFs are not included in the code repository.
+The project studies semiparametric causal mediation analysis for linear models with possibly non-Gaussian errors, with applications to the `uis` drug-treatment data and the `jobs` social-program data.
 
-## Included R scripts
+## Repository layout
 
-- `scripts/jci_interaction_mediation_revision.R`
-  - simulation study
-  - near-boundary power design
-  - `jobs` application
-  - `uis` application
-- `scripts/jci_interaction_figures.R`
-  - figure generation for the empirical applications
+- `scripts/stat_med_mediation_revision.R`: main analysis script for simulations, the near-boundary power example, and the two empirical applications
+- `scripts/stat_med_figures.R`: figure-generation script for the application-effect figure and supplementary residual histograms
+- `results/`: derived CSV outputs used in the manuscript
+- `figures/`: figure files used in the manuscript and supplement
+- `stat_med_submission.tex`: main manuscript
+- `stat_med_submission_supplement.tex`: online supplementary material
+- `stat_med_coverletter.tex`: cover letter
 
-## Suggested GitHub contents
+## Reproducibility
 
-For a code-only public release, upload at least:
+The analysis scripts rely on the supporting code in `R/jobs_semipara_delta_revision.R` together with several R packages, including `Matrix`, `sn`, `quantreg`, and `mediation`.
 
-- `scripts/`
-- `README.md`
-
-Optional additions:
-
-- `results/` if you want to share derived numerical outputs
-- `figures/` if you want to share manuscript figure files generated from the code
-
-## Notes
-
-- The `uis` analysis uses the rescaled outcome `TIME/100` only for numerical conditioning in root finding.
-- The code corresponds to the semiparametric mediation manuscript submitted to the *Journal of Causal Inference*.
+Running `scripts/stat_med_mediation_revision.R` regenerates the main result tables saved under `results/`. Running `scripts/stat_med_figures.R` regenerates the figure PDFs saved under `figures/`.
