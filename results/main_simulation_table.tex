@@ -1,0 +1,37 @@
+\begin{table}[t]
+\centering
+\caption{Main Monte Carlo results based on 1,000 attempted replications per cell. Performance metrics use numerically successful fits; success rates and effective counts appear in Table~S1. Boldface marks the more favorable value within each sample size, error distribution, effect, and metric: lower RMSE, coverage closer to 0.95, and shorter length}
+\label{tab:main_simulation}
+\small
+\begin{tabular}{rllrrrrrr}
+\toprule
+& & & \multicolumn{3}{c}{PNIE} & \multicolumn{3}{c}{TE} \\
+\cmidrule(lr){4-6}\cmidrule(lr){7-9}
+$n$ & Error & Method & RMSE & Cov. & Length & RMSE & Cov. & Length \\
+\midrule
+200 & Gaussian & OLS delta & \textbf{0.121} & \textbf{0.947} & \textbf{0.467} & \textbf{0.162} & \textbf{0.949} & \textbf{0.643} \\
+200 & Gaussian & Proposed & 0.130 & 0.932 & 0.495 & 0.175 & 0.938 & 0.682 \\
+\midrule
+200 & Skew-normal & OLS delta & 0.122 & 0.945 & 0.469 & 0.171 & \textbf{0.937} & 0.645 \\
+200 & Skew-normal & Proposed & \textbf{0.100} & \textbf{0.951} & \textbf{0.388} & \textbf{0.144} & 0.936 & \textbf{0.553} \\
+\midrule
+200 & Asymmetric mixture & OLS delta & 0.126 & \textbf{0.942} & 0.475 & 0.168 & \textbf{0.946} & 0.646 \\
+200 & Asymmetric mixture & Proposed & \textbf{0.055} & 0.940 & \textbf{0.120} & \textbf{0.088} & 0.937 & \textbf{0.327} \\
+\midrule
+200 & Symmetric bimodal & OLS delta & 0.119 & \textbf{0.940} & 0.470 & 0.157 & 0.957 & 0.646 \\
+200 & Symmetric bimodal & Proposed & \textbf{0.034} & 0.929 & \textbf{0.121} & \textbf{0.110} & \textbf{0.950} & \textbf{0.327} \\
+\midrule
+500 & Gaussian & OLS delta & \textbf{0.074} & \textbf{0.956} & \textbf{0.297} & \textbf{0.107} & 0.946 & \textbf{0.409} \\
+500 & Gaussian & Proposed & 0.078 & 0.958 & 0.311 & 0.111 & \textbf{0.950} & 0.424 \\
+\midrule
+500 & Skew-normal & OLS delta & 0.077 & \textbf{0.955} & 0.298 & 0.109 & \textbf{0.948} & 0.409 \\
+500 & Skew-normal & Proposed & \textbf{0.059} & 0.942 & \textbf{0.233} & \textbf{0.087} & 0.944 & \textbf{0.337} \\
+\midrule
+500 & Asymmetric mixture & OLS delta & 0.075 & 0.946 & 0.299 & 0.106 & 0.947 & 0.409 \\
+500 & Asymmetric mixture & Proposed & \textbf{0.019} & \textbf{0.949} & \textbf{0.074} & \textbf{0.054} & \textbf{0.948} & \textbf{0.205} \\
+\midrule
+500 & Symmetric bimodal & OLS delta & 0.076 & \textbf{0.945} & 0.298 & 0.101 & \textbf{0.955} & 0.409 \\
+500 & Symmetric bimodal & Proposed & \textbf{0.019} & 0.959 & \textbf{0.076} & \textbf{0.053} & 0.941 & \textbf{0.206} \\
+\bottomrule
+\end{tabular}
+\end{table}

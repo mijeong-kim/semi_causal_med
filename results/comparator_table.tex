@@ -1,0 +1,37 @@
+\begin{table}[t]
+\centering
+\caption{Comparator study at $n=300$ based on 500 attempted replications per cell. Performance metrics use numerically successful fits; the Imai procedures use 1,000 quasi-Bayesian draws or 499 bootstrap resamples per data set. Boldface marks the most favorable displayed value within each error distribution, effect, and metric: lower RMSE, coverage closer to 0.95, and shorter length}
+\label{tab:comparators}
+\small
+\begin{tabular}{llrrrrrr}
+\toprule
+& & \multicolumn{3}{c}{PNIE} & \multicolumn{3}{c}{TE} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+Error & Method & RMSE & Cov. & Length & RMSE & Cov. & Length \\
+\midrule
+Gaussian & OLS delta & \textbf{0.100} & \textbf{0.952} & \textbf{0.383} & \textbf{0.136} & \textbf{0.950} & \textbf{0.527} \\
+Gaussian & Imai quasi-Bayes & \textbf{0.100} & \textbf{0.948} & 0.387 & \textbf{0.136} & 0.960 & 0.572 \\
+Gaussian & Imai bootstrap & \textbf{0.100} & 0.940 & 0.384 & 0.149 & 0.964 & 0.565 \\
+Gaussian & \texttt{medflex} NEM & \textbf{0.100} & 0.942 & 0.389 & \textbf{0.136} & 0.952 & \textbf{0.527} \\
+Gaussian & Proposed & 0.107 & 0.944 & 0.407 & 0.139 & 0.952 & 0.549 \\
+\midrule
+Skew-normal & OLS delta & 0.097 & 0.952 & 0.386 & 0.132 & \textbf{0.954} & 0.527 \\
+Skew-normal & Imai quasi-Bayes & 0.097 & \textbf{0.950} & 0.388 & 0.132 & 0.974 & 0.572 \\
+Skew-normal & Imai bootstrap & 0.097 & 0.948 & 0.387 & 0.143 & 0.976 & 0.564 \\
+Skew-normal & \texttt{medflex} NEM & 0.098 & 0.944 & 0.392 & 0.132 & 0.958 & 0.528 \\
+Skew-normal & Proposed & \textbf{0.077} & 0.956 & \textbf{0.312} & \textbf{0.108} & 0.962 & \textbf{0.442} \\
+\midrule
+Asymmetric mixture & OLS delta & 0.099 & 0.962 & 0.388 & 0.143 & 0.928 & 0.527 \\
+Asymmetric mixture & Imai quasi-Bayes & 0.100 & 0.958 & 0.390 & 0.143 & 0.954 & 0.573 \\
+Asymmetric mixture & Imai bootstrap & 0.099 & 0.962 & 0.390 & 0.156 & \textbf{0.952} & 0.567 \\
+Asymmetric mixture & \texttt{medflex} NEM & 0.101 & 0.958 & 0.394 & 0.143 & 0.930 & 0.527 \\
+Asymmetric mixture & Proposed & \textbf{0.027} & \textbf{0.950} & \textbf{0.096} & \textbf{0.072} & 0.932 & \textbf{0.264} \\
+\midrule
+Symmetric bimodal & OLS delta & 0.094 & 0.956 & 0.384 & 0.132 & 0.956 & 0.527 \\
+Symmetric bimodal & Imai quasi-Bayes & 0.094 & \textbf{0.954} & 0.388 & 0.132 & 0.964 & 0.575 \\
+Symmetric bimodal & Imai bootstrap & 0.094 & 0.964 & 0.384 & 0.150 & 0.966 & 0.565 \\
+Symmetric bimodal & \texttt{medflex} NEM & 0.096 & 0.962 & 0.390 & 0.132 & 0.956 & 0.527 \\
+Symmetric bimodal & Proposed & \textbf{0.033} & 0.943 & \textbf{0.099} & \textbf{0.083} & \textbf{0.951} & \textbf{0.266} \\
+\bottomrule
+\end{tabular}
+\end{table}

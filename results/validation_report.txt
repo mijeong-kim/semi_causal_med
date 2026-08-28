@@ -1,0 +1,8 @@
+Computational Statistics output validation passed.
+Main status rows: 16000
+Main successful fits: 15807
+Comparator status rows: 10000
+Comparator successful fits: 9972
+Application methods: 5
+Maximum decomposition error: 1.01644e-14
+Validated at: 2026-08-28 17:09:22
