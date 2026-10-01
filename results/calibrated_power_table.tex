@@ -1,0 +1,33 @@
+\begin{table}[htbp]
+\centering\small
+\caption{Held-out PNIE rejection probabilities. Each effect uses 1,000 new data sets. Nominal and calibrated rates condition on valid fits; Report/reject uses all attempts. MCSE includes both calibration and evaluation uncertainty. At $\beta_2=0$ the rates estimate type~I error, and elsewhere they estimate power.}
+\label{tab:power-calibrated}
+\begin{tabular}{rlrrrrr}
+\toprule
+$\beta_2$ & Method & Valid & Nominal & Calibrated & MCSE & Report/reject \\ \midrule
+0.0 & OLS & 1000 & 0.018 & 0.054 & 0.008 & 0.054 \\
+0.0 & Huber-FIX & 1000 & 0.048 & 0.057 & 0.010 & 0.057 \\
+0.0 & Huber-SEL & 1000 & 0.055 & 0.052 & 0.008 & 0.052 \\
+0.0 & Proposed & 965 & 0.055 & 0.052 & 0.008 & 0.050 \\
+\midrule
+0.1 & OLS & 1000 & 0.043 & 0.112 & 0.012 & 0.112 \\
+0.1 & Huber-FIX & 1000 & 0.644 & 0.652 & 0.018 & 0.652 \\
+0.1 & Huber-SEL & 1000 & 0.730 & 0.721 & 0.018 & 0.721 \\
+0.1 & Proposed & 962 & 0.928 & 0.927 & 0.009 & 0.892 \\
+\midrule
+0.2 & OLS & 1000 & 0.174 & 0.323 & 0.018 & 0.323 \\
+0.2 & Huber-FIX & 1000 & 0.990 & 0.992 & 0.003 & 0.992 \\
+0.2 & Huber-SEL & 1000 & 0.999 & 0.999 & 0.001 & 0.999 \\
+0.2 & Proposed & 960 & 1.000 & 1.000 & 0.000 & 0.960 \\
+\midrule
+0.3 & OLS & 1000 & 0.473 & 0.632 & 0.018 & 0.632 \\
+0.3 & Huber-FIX & 1000 & 1.000 & 1.000 & 0.000 & 1.000 \\
+0.3 & Huber-SEL & 1000 & 1.000 & 1.000 & 0.000 & 1.000 \\
+0.3 & Proposed & 967 & 1.000 & 1.000 & 0.000 & 0.967 \\
+\midrule
+0.4 & OLS & 1000 & 0.631 & 0.789 & 0.015 & 0.789 \\
+0.4 & Huber-FIX & 1000 & 1.000 & 1.000 & 0.000 & 1.000 \\
+0.4 & Huber-SEL & 1000 & 1.000 & 1.000 & 0.000 & 1.000 \\
+0.4 & Proposed & 967 & 1.000 & 1.000 & 0.000 & 0.967 \\
+\bottomrule\end{tabular}
+\end{table}

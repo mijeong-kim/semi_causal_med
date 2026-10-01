@@ -1,0 +1,4 @@
+List of 3
+ $ source: chr [1:3] "8204ce3109ee50187dd70aa782e54a5a" "50d09761da8296181ca622bedef1724a" "e376dff78df34451b2a2769774685e96"
+ $ reps  : int 500
+ $ R     : chr "R version 4.6.1 (2026-06-24)"

@@ -1,0 +1,9 @@
+Source: jobs data distributed with mediation 4.5.1.
+Rows loaded: 899 Complete analysis rows: 899
+Treatment: randomized assignment (treat); mediator: job_seek; outcome: depress2.
+Baseline covariates: depress1, econ_hard, sex, age
+Covariate sensitivity removes baseline depression while retaining the other terms.
+Variance diagnostics: n R^2 from squared OLS residuals on fitted values (1 df)
+and separately on all non-intercept columns of each original design matrix.
+The package illustration contains complete measurements for all selected variables.
+All observations, transformations and model specifications were fixed before fitting.

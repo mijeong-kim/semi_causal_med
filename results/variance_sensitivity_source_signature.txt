@@ -1,0 +1,5 @@
+List of 4
+ $ plan   : chr "51348720a6c7d3f0396228b056d0d33c"
+ $ core   : chr "50d09761da8296181ca622bedef1724a"
+ $ helpers: chr "933261211b8a05dcad79776672c6fd6f"
+ $ reps   : int 500

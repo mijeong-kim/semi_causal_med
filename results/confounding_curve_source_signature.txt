@@ -1,0 +1,6 @@
+list(source = c(`R/confounding_curve.R` = "60682ef9e80fc7f17d28193fc53426aa", 
+`R/run_confounding_curve.R` = "1c2a9ede394b23fb3a77d0bf753d086c", 
+`R/confounding_sensitivity.R` = "8204ce3109ee50187dd70aa782e54a5a", 
+`R/semiparametric_mediation.R` = "50d09761da8296181ca622bedef1724a", 
+CURVE_SIMULATION_PLAN_20260916.md = "5a60984d3b512e9e4d5e2fdee96fb3af"
+), reps = 500L, R = "R version 4.6.1 (2026-06-24)")

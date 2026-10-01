@@ -1,0 +1,6 @@
+Full-curve output validation PASSED.
+Attempted/valid method fits: 6000 5997
+Maximum original-refit discrepancy: 9.992007e-15
+Maximum independent curve-summary discrepancy: 5.107026e-15
+All original seeds, fit statuses, two-value results and zero boundaries reproduced.
+Separate curve/causal targets, paired denominators and exact decompositions checked.

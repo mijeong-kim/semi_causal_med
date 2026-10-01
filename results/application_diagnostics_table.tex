@@ -1,0 +1,14 @@
+\begin{table}[htbp]
+\centering
+\caption{Baseline-adjusted OLS residual diagnostics. Normality $p$ is from Shapiro--Wilk. Fitted $p$ uses squared residuals regressed on fitted values; full LM is $nR^2$ using all original non-intercept design columns, with the displayed degrees of freedom (df). Tests are diagnostic checks, not tests of causal identification}
+\label{tab:application_diagnostics}
+\small
+\begin{tabular}{lrrrrrrr}
+\toprule
+Equation & Skew. & Ex. kurt. & Normality $p$ & Fitted $p$ & Full LM & df & Full $p$ \\
+\midrule
+Mediator & -0.781 & 0.856 & 1.81e-14 & 3.00e-02 & 13.06 & 5 & 2.28e-02 \\
+Outcome & 1.083 & 1.875 & 1.04e-18 & 8.43e-08 & 30.50 & 7 & 7.67e-05 \\
+\bottomrule
+\end{tabular}
+\end{table}

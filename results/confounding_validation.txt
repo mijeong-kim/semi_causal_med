@@ -1,0 +1,6 @@
+Confounding-sensitivity output validation PASSED.
+Attempted/valid method fits: 6000 5997
+Maximum independent summary discrepancy: 5.551115e-16
+Maximum decomposition discrepancy: 9.978129e-15
+Seed grid, paired denominators, six reconstructed OLS fits, population zero boundaries checked.
+Application curves, both contour signs and zero boundaries checked.

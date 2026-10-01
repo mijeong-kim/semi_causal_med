@@ -1,0 +1,7 @@
+Comparator validation PASSED.
+Four error distributions; 1,000 replications per distribution; n=300.
+Attempted/valid method fits: 20000 19940
+All 4,000 task seeds, five-effect availability, and 100 summary cells checked.
+Maximum independently reconstructed summary discrepancy: 6.106227e-16
+Maximum OLS refit discrepancy on 16 data sets: 4.884981e-15
+Validated: 2026-09-30 16:22:49.458192

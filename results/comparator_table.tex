@@ -1,0 +1,37 @@
+\begin{table}[t]
+\centering
+\caption{Comparator study at $n=300$ based on 1,000 attempts per cell, summarized over valid fits. The Imai procedures use 1,000 quasi-Bayesian draws or 499 bootstrap resamples per data set. Error abbreviations are as in Table~\ref{tab:main_simulation}. Boldface marks the smallest displayed RMSE and shortest length within each design and effect; these descriptive highlights are interpreted jointly with coverage and numerical success}
+\label{tab:comparators}
+\small
+\begin{tabular}{llrrrrrr}
+\toprule
+& & \multicolumn{3}{c}{PNIE} & \multicolumn{3}{c}{TE} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+Error & Method & RMSE & Cov. & Length & RMSE & Cov. & Length \\
+\midrule
+G & OLS delta & \textbf{0.100} & 0.952 & \textbf{0.383} & \textbf{0.135} & 0.955 & 0.527 \\
+G & Imai quasi-Bayes & \textbf{0.100} & 0.950 & 0.387 & \textbf{0.135} & 0.962 & 0.573 \\
+G & Imai bootstrap & \textbf{0.100} & 0.946 & 0.384 & 0.147 & 0.966 & 0.565 \\
+G & \texttt{medflex} NEM & \textbf{0.100} & 0.950 & 0.385 & \textbf{0.135} & 0.954 & \textbf{0.522} \\
+G & Proposed & 0.107 & 0.942 & 0.406 & 0.139 & 0.948 & 0.552 \\
+\midrule
+SN & OLS delta & 0.099 & 0.950 & 0.385 & 0.133 & 0.952 & 0.527 \\
+SN & Imai quasi-Bayes & 0.100 & 0.949 & 0.388 & 0.133 & 0.970 & 0.572 \\
+SN & Imai bootstrap & 0.099 & 0.939 & 0.386 & 0.146 & 0.968 & 0.566 \\
+SN & \texttt{medflex} NEM & 0.099 & 0.950 & 0.386 & 0.133 & 0.950 & 0.522 \\
+SN & Proposed & \textbf{0.079} & 0.955 & \textbf{0.310} & \textbf{0.112} & 0.947 & \textbf{0.443} \\
+\midrule
+AM & OLS delta & 0.101 & 0.944 & 0.387 & 0.141 & 0.935 & 0.527 \\
+AM & Imai quasi-Bayes & 0.102 & 0.944 & 0.389 & 0.141 & 0.954 & 0.573 \\
+AM & Imai bootstrap & 0.101 & 0.945 & 0.390 & 0.153 & 0.953 & 0.567 \\
+AM & \texttt{medflex} NEM & 0.102 & 0.948 & 0.388 & 0.140 & 0.935 & 0.522 \\
+AM & Proposed & \textbf{0.026} & 0.938 & \textbf{0.096} & \textbf{0.069} & 0.944 & \textbf{0.264} \\
+\midrule
+BM & OLS delta & 0.096 & 0.956 & 0.385 & 0.133 & 0.951 & 0.527 \\
+BM & Imai quasi-Bayes & 0.096 & 0.956 & 0.388 & 0.134 & 0.960 & 0.574 \\
+BM & Imai bootstrap & 0.096 & 0.957 & 0.386 & 0.148 & 0.961 & 0.566 \\
+BM & \texttt{medflex} NEM & 0.096 & 0.955 & 0.386 & 0.134 & 0.948 & 0.522 \\
+BM & Proposed & \textbf{0.029} & 0.949 & \textbf{0.098} & \textbf{0.079} & 0.941 & \textbf{0.266} \\
+\bottomrule
+\end{tabular}
+\end{table}

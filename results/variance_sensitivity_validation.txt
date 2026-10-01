@@ -1,0 +1,6 @@
+Variance-sensitivity validation PASSED.
+Attempted method fits: 14000
+Valid method fits: 13792
+Maximum independent summary discrepancy: 6.661338e-16
+Maximum natural-effect decomposition discrepancy: 9.992007e-15
+Population scale normalization, seed grid, paired denominators and 14 reconstructed OLS maps checked.

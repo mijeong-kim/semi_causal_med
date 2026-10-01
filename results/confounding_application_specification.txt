@@ -1,0 +1,8 @@
+JOBS II: same 899 observations and baseline terms as the primary analysis.
+Pooled M ~ T + baseline; separate reduced Y ~ baseline in T=0 and T=1.
+The reduced-form extension estimates Y models separately by treatment stratum.
+A common analyst-specified rho is varied over [-0.8,0.8].
+Contour axes are residual R-squared fractions under the shared-confounder calibration.
+Both confounding signs and pointwise interval-zero contours are shown.
+The reduced-form results complement the primary conditional-outcome analysis.
+Working-model variance restrictions and causal qualifications apply.

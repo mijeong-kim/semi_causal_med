@@ -1,0 +1,33 @@
+\begin{table}[htbp]\centering\small\setlength{\tabcolsep}{4pt}
+\caption{Zero-boundary inference in the confounding simulation. The same retained data sets are used; these are not additional independent replications. Coverage and length refer to the Fisher-transform interval for $\rho_t^\dagger$.}
+\label{tab:curve-thresholds}
+\begin{tabular}{lrllrrrr}\toprule
+Error & $\rho_{\rm true}$ & Effect & Method & Bias & RMSE & Coverage (MCSE) & Length\\\midrule
+AM & -0.3 & PNIE & OLS-RF & 0.003 & 0.068 & 0.958 (0.009) & 0.276\\
+AM & -0.3 & PNIE & DS-RF & 0.004 & 0.068 & 0.960 (0.009) & 0.275\\
+AM & -0.3 & TNIE & OLS-RF & 0.001 & 0.078 & 0.940 (0.011) & 0.311\\
+AM & -0.3 & TNIE & DS-RF & 0.002 & 0.077 & 0.944 (0.010) & 0.311\\
+AM & 0.0 & PNIE & OLS-RF & 0.006 & 0.072 & 0.958 (0.009) & 0.290\\
+AM & 0.0 & PNIE & DS-RF & 0.006 & 0.072 & 0.960 (0.009) & 0.290\\
+AM & 0.0 & TNIE & OLS-RF & 0.008 & 0.081 & 0.946 (0.010) & 0.311\\
+AM & 0.0 & TNIE & DS-RF & 0.007 & 0.081 & 0.944 (0.010) & 0.312\\
+AM & 0.3 & PNIE & OLS-RF & -0.002 & 0.079 & 0.950 (0.010) & 0.306\\
+AM & 0.3 & PNIE & DS-RF & -0.002 & 0.079 & 0.950 (0.010) & 0.305\\
+AM & 0.3 & TNIE & OLS-RF & -0.003 & 0.080 & 0.936 (0.011) & 0.301\\
+AM & 0.3 & TNIE & DS-RF & -0.004 & 0.079 & 0.936 (0.011) & 0.301\\
+\midrule
+G & -0.3 & PNIE & OLS-RF & 0.002 & 0.058 & 0.950 (0.010) & 0.215\\
+G & -0.3 & PNIE & DS-RF & 0.002 & 0.058 & 0.948 (0.010) & 0.215\\
+G & -0.3 & TNIE & OLS-RF & 0.002 & 0.080 & 0.954 (0.009) & 0.311\\
+G & -0.3 & TNIE & DS-RF & 0.002 & 0.080 & 0.952 (0.010) & 0.311\\
+G & 0.0 & PNIE & OLS-RF & 0.006 & 0.063 & 0.946 (0.010) & 0.243\\
+G & 0.0 & PNIE & DS-RF & 0.006 & 0.063 & 0.946 (0.010) & 0.243\\
+G & 0.0 & TNIE & OLS-RF & 0.005 & 0.081 & 0.944 (0.010) & 0.307\\
+G & 0.0 & TNIE & DS-RF & 0.005 & 0.081 & 0.948 (0.010) & 0.307\\
+G & 0.3 & PNIE & OLS-RF & 0.008 & 0.069 & 0.954 (0.009) & 0.274\\
+G & 0.3 & PNIE & DS-RF & 0.008 & 0.069 & 0.954 (0.009) & 0.274\\
+G & 0.3 & TNIE & OLS-RF & -0.000 & 0.069 & 0.946 (0.010) & 0.274\\
+G & 0.3 & TNIE & DS-RF & -0.000 & 0.069 & 0.944 (0.010) & 0.274\\
+\bottomrule\end{tabular}
+\par\smallskip\begin{minipage}{0.98\textwidth}\footnotesize G: Gaussian; AM: asymmetric mixture. Each cell starts with 500 attempts. Success denominators and failure records are the same as for Table~\ref{tab:confounding-simulation}. A zero boundary of the point-estimate curve is not an interval-zero boundary.\end{minipage}
+\end{table}
