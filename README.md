@@ -1,65 +1,63 @@
-# Semiparametric Causal Mediation: JKSS Reproducibility Materials
+# Semiparametric Causal Mediation: Code and Reproducibility Materials
 
-**Journal:** Journal of the Korean Statistical Society  
+**Target journal:** Journal of the Korean Statistical Society  
 **Author:** Mijeong Kim  
 **Affiliation:** Department of Statistics, Ewha Womans University, Seoul, Republic of Korea  
 **Correspondence:** m.kim@ewha.ac.kr  
 **ORCID:** 0000-0002-3578-5413  
 **Public repository:** https://github.com/mijeong-kim/semi_causal_med
 
-This repository provides code, data, replication-level Monte Carlo performance
-and sensitivity output, complete size-power summaries, derived tables, figures,
-and supplementary material for **Semiparametric Inference and Sensitivity Analysis
+This repository provides analysis code, data, retained numerical results and
+standalone figures for **Semiparametric Inference and Sensitivity Analysis
 for Causal Mediation in Linear Models with Unspecified Error Distributions**.
-This local upload snapshot was refreshed on **2026-10-01**, using the manuscript
-and supplement revised on 2026-10-01. It is the independent-error, density-score
-JKSS study, not the separate cross-fitted heteroscedastic project. Preparation
-of this folder does not itself update the public repository or create a release.
+The replication snapshot was refreshed on **2026-10-01**. It concerns the
+independent-error, density-score mediation study, not the separate cross-fitted
+heteroscedastic project.
 
-Code and reproducibility materials are distributed through this repository
-rather than a separately submitted ZIP. Online Resource 1 (Supplementary Material)
-is supplied as `output/pdf/ESM_1.pdf`; the identical `JKSS_supplement.pdf` is
-retained for existing links. Before submission, upload the matching files, verify their public
-availability and record the exact commit or a tagged release.
+## Public Repository Scope
 
-The main article is provided separately from these replication materials.
-Its PDF and the top-level article and supplementary LaTeX sources are not
-required for any analysis, validation or table-and-figure command documented
-below. Generated LaTeX tables in `results/` remain part of the numerical outputs.
+The main article and its Supplementary Material are reserved for separate
+submission to the Journal of the Korean Statistical Society. Their PDFs and
+LaTeX document sources are not part of the public distribution. This repository
+is for computational reproducibility, not for distributing the submission
+documents.
+
+The public materials are the R code in `R/`, study data in `data/`, numerical
+records and diagnostics in `results/`, standalone figures in `figures/`, and
+the instructions and provenance needed to use them. Figure PDFs are individual
+plots, not the article or supplementary document. The author-side `output/`
+directory, including compiled documents and backup ZIPs, is not an upload target.
+
+The commands below reproduce analyses, numerical summaries and figures without
+the article or supplementary sources. They also generate table fragments locally
+in `results/`; these generated `.tex` fragments are numerical exports, not the
+LaTeX sources of the submission documents.
 
 **Compact results:** large CSV files are supplied as lossless `.csv.gz` files.
 All replication rows and original numeric precision are retained. The supplied
-R scripts read these files directly without extracting them, so the commands
-below are unchanged. Summary tables remain available in plain CSV/LaTeX form
+R scripts read these files directly without extracting them.
+Numerical summaries remain available as plain CSV files
 except for the large full-curve summary. See [compression details](docs/COMPACT_RESULTS.md).
 
-- [Online Resource 1: Supplementary Material (PDF)](output/pdf/ESM_1.pdf)
-- [Snapshot provenance and packaging changes](docs/PACKAGING_NOTES.md)
+- [Standalone figures](figures/)
+- [Numerical results and diagnostics](results/)
 - [Executed checks and their scope](docs/VERIFICATION.md)
 - [Data provenance](data/README.md) and [third-party notices](THIRD_PARTY_NOTICES.md)
 
 The main experiments compare OLS and the proposed estimator at n=200 and 500
 with 1,000 replications per error law. The separate n=300 comparator experiment
 uses 1,000 replications per law, 1,000 quasi-Bayesian draws and 499 bootstrap
-resamples. The package also includes independently calibrated power comparisons
+resamples. The materials also include independently calibrated power comparisons
 with Huber-based estimators, variance-misspecification experiments, confounding
 sensitivity curves, and the JOBS II illustration. Failures and seed records are
 retained alongside successful-fit summaries.
 
-Section 2 contains the model and standard effect identities, regression scores,
-stacked inference, the asymptotic variance/local-power comparison (Section 2.4),
-and the numerical algorithm (Section 2.5). The sensitivity extension retains
+The implementation combines regression density scores, stacked inference and
+a deterministic multi-start algorithm. The sensitivity extension retains
 Imai et al.'s fixed-correlation identification map while changing nuisance
-estimation and propagating its joint covariance. The manuscript and supplement
-state the scope and assumptions of these results.
-
-Online Resource 1 follows the article's order: theory and algorithm (S1-S4),
-complete simulation results and paired-fit audit (S5), nominal and calibrated
-power plus numerical sensitivity (S6), variance misspecification (S7),
-confounding-sensitivity theory and simulation (S8), all JOBS II results and
-diagnostics (S9), and the reproducibility record (S10). The update retains all
-16 tables and six figures and changes their placement, numbering and explanatory
-text, not the stored numerical results.
+estimation and propagating its joint covariance. The scope and assumptions of
+each experiment are summarized below; the full methodological exposition is
+part of the separately submitted documents.
 
 ## Quick Start
 
@@ -126,7 +124,7 @@ The `confounding` target also runs the reduced-form JOBS II sensitivity analysis
 `R/run_application.R` runs the primary JOBS II comparison. Validation checks the
 effect-map derivatives, replication counts, summaries and decompositions.
 The final targets regenerate the tables and figures and losslessly compact the
-large result files. They do not compile or distribute the main article.
+large result files. They do not compile either submission document.
 Do not add `make -j`: the experiments have their own worker controls, and the
 listed targets must run sequentially because later steps use earlier results.
 
@@ -178,10 +176,10 @@ The tuning rules follow Wang, Peng and Tong (2025), with final-residual
 centered-design influence covariance adapted to interaction and joint PNIE
 inference. This is not an exact replication of their simple-mediation Sobel code.
 
-The plan and full mathematical specification are in
-`POWER_CALIBRATION_PLAN_20260923.md` and Supplement Section S6. Method-specific
-95th-percentile cutoffs are computed only from valid calibration-null fits;
-held-out null data evaluate the achieved size. These are DGP-specific simulation
+The design and tuning rules are implemented in `R/calibrated_power.R` and
+`R/run_calibrated_power.R`. Method-specific 95th-percentile cutoffs are computed
+only from valid calibration-null fits; held-out null data evaluate the achieved
+size. These are DGP-specific simulation
 diagnostics, not proposed critical values for applications. Independent resampling
 of both Monte Carlo stages preserves method pairing and quantifies calibration
 and evaluation uncertainty. Conditional, all-attempt and common-valid results
@@ -288,8 +286,12 @@ reduced counts are used.
 - `results/`: retained replication-level records, status logs, all reported summaries, generated tables, and `sessionInfo.txt`
 - `R/results_io.R`: transparent reading of plain CSV and compressed CSV results
 - `R/compress_results.R`: verified lossless compaction after rerunning analyses (`make compact`)
-- `figures/`: vector PDF figures
-- `output/pdf/`: `ESM_1.pdf` for Online Resource 1 and its identical compatibility copy `JKSS_supplement.pdf`
+- `figures/`: standalone vector PDF plots; the public graphical outputs
+- `docs/`: computational checks, result-compression details and provenance records
+
+The public directory map excludes article and supplementary-document PDFs,
+their top-level `.tex` sources, and the author-side `output/` directory. Numerical
+exports generated in `results/` are distinct from those submission documents.
 
 ## Random-number seeds
 
