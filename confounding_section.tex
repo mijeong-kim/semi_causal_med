@@ -1,0 +1,58 @@
+\section{Density-score confounding-sensitivity analysis}
+\label{sec:confounding}
+
+We extend the density-score strategy of Section~\ref{sec:methodology} to residual-correlation sensitivity analysis. Allowing structural outcome errors to depend on $M$ prevents direct reuse of the outcome-regression score under its original independence assumption. We therefore use reduced-form regressions with unspecified marginal error densities and propagate their joint uncertainty through the sensitivity functional.
+
+\subsection{Sensitivity target and reduced-form model}
+
+We retain treatment exchangeability, consistency, positivity and a linear structural outcome model, while allowing mediator--outcome confounding. The pooled mediator and treatment-specific reduced-outcome means are
+\[
+\E(M\mid T,\bX)=\alpha_2+\beta_2T+\bm\xi_2\trans\bX,
+\qquad q_t(\bX)=\E(Y\mid T=t,\bX)=a_t+\bm d_t\trans\bX.
+\]
+Let $U=M-\E(M\mid T,\bX)$ be independent of $(T,\bX)$ and let $W_t=Y-q_t(\bX)$ within $T=t$. The joint law of $(U,W_t)$ is assumed not to depend on $\bX$ within that stratum, while dependence between $U$ and $W_t$ is allowed. These restrictions permit marginal density-score regression without assuming independence between regression blocks. Write $v_M=\Var(U)$, $v_t=\Var(W_t\mid T=t)$ and $\omega_t=\Cov(U,W_t\mid T=t)$, with $v_Mv_t>\omega_t^2$. The mediator's error law is common across treatment groups; outcome reduced-form error laws may differ. Together with the linear means, these assumptions define the reduced-form working model.
+
+For a structural mediator slope $b_t$ in treatment stratum $t$, the structural outcome error is $E_t=W_t-b_tU$. Specify $\rho_t=\operatorname{Corr}(U,E_t\mid T=t)$ as a sensitivity parameter. Solving the covariance identities gives
+\begin{equation}
+b_t(\rho_t)=\frac{\omega_t}{v_M}
+-\frac{\rho_t}{\sqrt{1-\rho_t^2}}
+\sqrt{\frac{v_t}{v_M}-\frac{\omega_t^2}{v_M^2}},
+\qquad -1<\rho_t<1.
+\label{eq:sensitivity-slope}
+\end{equation}
+Equation~\eqref{eq:sensitivity-slope} is the stratum-specific identity of \citet[Section~5 and Appendix~D]{imai2010a}. Because it uses only second-moment identities, it requires no Gaussian error assumption and applies to the stated semiparametric model with unspecified error densities. Its causal interpretation requires an additive outcome error invariant to mediator intervention and a constant mediator slope within each stratum; $b_1-b_0$ represents treatment--mediator interaction. Section~S8 of Online Resource~1 gives the structural derivation.
+
+Let $\tau=(a_1-a_0)+(\bm d_1-\bm d_0)\trans\bmu_X$. The sensitivity functionals are
+\begin{align}
+\delta_t(\rho_t)&=\beta_2 b_t(\rho_t),\nonumber\\
+\zeta_0(\rho_1)&=\tau-\delta_1(\rho_1),\qquad
+\zeta_1(\rho_0)=\tau-\delta_0(\rho_0).
+\label{eq:sensitivity-effects}
+\end{align}
+The illustrations follow the analyst-specified path $\rho_0=\rho_1=\rho$ through the two-correlation space; these correlations are not identified from observed data alone. At the population level, $\rho=0$ recovers the usual linear mean-effect decomposition, but zero correlation need not imply full sequential ignorability with non-Gaussian errors.
+
+\subsection{Semiparametric estimation and joint inference}
+
+To estimate \eqref{eq:sensitivity-effects}, we apply the density scores of Section~\ref{sec:regression-scores} to $M$ on $(1,T,\bX)$ and to $Y$ on $(1,\bX)$ within each treatment group, with an unspecified marginal error density for each regression. The OLS reduced-form benchmark uses the same regressions and an empirical sandwich, with residual second-moment equations for the variances. Both implementations append $1(T=t)(UW_t-\omega_t)$ for $t=0,1$ and $\bX-\bmu_X$ to their stacked equations. Cross-product moments and cross-block empirical score covariance account for dependence between the reduced-form errors. Full equations, bread derivatives and effect gradients are given in Section~S8 of Online Resource~1.
+
+Write the resulting nuisance vector as $\theta$ and the map in \eqref{eq:sensitivity-effects} as $g(\theta;\rho)$. The sensitivity estimator is $g(\widehat\theta;\rho)$. For fixed $\rho$, if the fitted marginal regressions and appended moments satisfy the joint asymptotic-linearity conditions stated in Section~S8, then the ordinary delta method gives
+\[
+\varphi_{g,\rho}=G_\rho\varphi_\theta,
+\qquad
+\widehat\Var\{g(\widehat\theta;\rho)\}
+=\widehat G_\rho\widehat\Var(\widehat\theta)\widehat G_\rho\trans.
+\]
+We call the implementations Ordinary Least Squares Reduced-Form (OLS-RF) and Density-Score Reduced-Form (DS-RF). Efficient marginal scores under the working model supply the DS-RF components, with mediator pooling exploiting the common error shape to estimate $\beta_2$.
+
+For $\beta_2\ne0$, solving the sensitivity identity for the point-estimate zero boundary gives
+\[
+\rho_t^\dagger=\omega_t/\sqrt{v_Mv_t}.
+\]
+Its uncertainty uses the full nuisance covariance and a Fisher-transform delta interval. We distinguish the point-estimate zero $\widehat\rho_t^\dagger$ from the correlation where a pointwise effect interval first includes zero, starting with the interval at $\rho=0$. The former has a common first-order residual-moment representation for both methods; density-score gains in curve estimation arise primarily through regression coefficients and their joint covariance.
+
+\subsection{Numerical evaluation}
+
+The extension is evaluated at $n=300$, with 500 attempts per configuration, using Gaussian and asymmetric-mixture innovations and $\rho_{\rm true}\in\{-0.3,0,0.3\}$. The original structural means are retained. Independent standardized innovations generate $\epsilon_M=U_M$ and $\epsilon_Y=\rho_{\rm true}U_M+\sqrt{1-\rho_{\rm true}^2}U_Y$, preserving natural effects while introducing confounding at nonzero correlation. Both methods are evaluated at $\rho=\rho_{\rm true}$ and the unadjusted reference $\rho=0$. The six configurations yield 3,000 data sets and 6,000 method attempts. Table~S10 gives representative effects at the true correlation; Section~S8 details verification and complete-output reporting.
+
+\input{results/confounding_simulation_findings.tex}
+\input{confounding_curve_section.tex}

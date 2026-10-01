@@ -1,0 +1,17 @@
+\subsection{Confounding-sensitivity analysis for JOBS II}
+
+Using the same participants and baseline variables, we fit the reduced-form extension over $\rho\in[-0.8,0.8]$. The three-regression stack and its complete nuisance covariance provide a self-contained calculation of the sensitivity functionals and their uncertainty. Its finite-sample $\rho=0$ results complement the primary conditional-outcome estimates in Table~\ref{tab:application_effects} as a distinct reduced-form analysis.
+
+\input{results/confounding_application_table.tex}
+
+We use the additional variance-decomposition interpretation of \citet{imai2010a}. Let $R_M^{2*}$ and $R_Y^{2*}$ denote the residual variance fractions explained by a hypothetical pretreatment confounder. The calibration is $\rho=s\sqrt{R_M^{2*}R_Y^{2*}}$, where $s\in\{-1,1\}$ specifies opposite or matching confounder-effect signs. Figure~\ref{fig:confounding-contours} shows both signs. The axes quantify residual-variance fractions and are distinct from the total-variance quantities $\widetilde R_M^2,\widetilde R_Y^2$. This working calibration translates specified latent variance contributions into sensitivity values; the one-dimensional PNIE/TNIE curves appear in Figure~S6.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/confounding_r2_contours.pdf}
+\caption{JOBS II PNIE sensitivity contours from OLS-RF and DS-RF. Each black curve gives combinations of hypothetical residual-variance fractions yielding the labeled point estimate. The thick zero contour concerns the point estimate when crossed in the displayed grid; dashed orange curves mark a pointwise nominal interval endpoint equal to zero. Both confounding signs are shown. The contours are interpreted under the reduced-form working model and alongside the residual-variance diagnostics.}
+\label{fig:confounding-contours}
+\end{figure}
+
+\input{results/confounding_application_findings.tex}
+\FloatBarrier

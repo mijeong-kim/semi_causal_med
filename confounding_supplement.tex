@@ -1,0 +1,77 @@
+\clearpage
+\section{Reduced-form confounding-sensitivity extension}
+\label{sec:confounding-supp}
+
+\subsection{Identification and attribution}
+
+This section develops the density-score estimation and covariance propagation for the fixed-error-correlation sensitivity identity of Imai, Keele and Yamamoto (2010), as cited in the main article. Let $m_t(\bX)=\alpha_2+\beta_2t+\bm\xi_2\trans\bX$ and $q_t(\bX)=a_t+\bm d_t\trans\bX$. A sufficient structural formulation is
+\[
+M(t)=m_t(\bX)+U_t,\qquad
+Y(t,m)=q_t(\bX)+b_t\{m-m_t(\bX)\}+E_t.
+\]
+Assume treatment exchangeability conditional on baseline $\bX$, consistency and positivity; $U_t,E_t$ have conditional mean zero; and $E_t$ is invariant to the intervention value $m$. The sensitivity model allows mediator--outcome dependence through the joint law of $U_t$ and $E_t$. The observed reduced-form error is $W_t=b_tU_t+E_t$. Its conditional variance and covariance with $U_t$ obey
+\[
+\omega_t=b_tv_M+\rho_t\sqrt{v_M\Var(E_t)},\quad
+v_t=b_t^2v_M+\Var(E_t)+2b_t\rho_t\sqrt{v_M\Var(E_t)}.
+\]
+Solving with positive $\Var(E_t)$ yields the main article's sensitivity slope. The natural indirect effect is $b_t\E\{M(1)-M(0)\}=b_t\beta_2$, since the additive $E_t$ cancels in the difference of nested potential outcomes. The total effect is $\E(q_1-q_0)$, giving the direct effects by the two decomposition identities. Thus the linear structural form supplies the causal interpretation and defines the sensitivity class: additive mediator--outcome confounding with an intervention-invariant structural error and a stratum-specific constant mediator slope.
+
+For estimation, $U=M-m_T(\bX)$ has a common law independent of $(T,\bX)$, and the joint law of $(U,W_t)$ is stable across $\bX$ within each stratum. These assumptions support pooled-mediator and stratum-specific reduced-outcome fits with unspecified marginal densities. The figures follow the common-$\rho$ path through $(\rho_0,\rho_1)$.
+
+\subsection{Estimating equations and covariance}
+
+Let $S_M$ be the marginal regression score for $M$ on $(1,T,\bX\trans)$ and $S_{W_t}$ the score for $Y$ on $(1,\bX\trans)$ within $T=t$. The stacked population function is
+\[
+\Psi_i(\theta)=\begin{pmatrix}
+S_{M,i}\\
+1(T_i=0)S_{W_0,i}\\
+1(T_i=1)S_{W_1,i}\\
+1(T_i=0)(U_iW_{0i}-\omega_0)\\
+1(T_i=1)(U_iW_{1i}-\omega_1)\\
+\bX_i-\bmu_X
+\end{pmatrix}.
+\]
+The first three blocks use the density-score equations and numerical settings in the main article. The OLS benchmark replaces each regression block by $(D e, e^2/v-1)$, with parameters $(\beta,\log v)$, so both methods estimate the same coefficient and variance nuisance parameters. Cross-covariances are the sample averages of fitted residual products within treatment groups. The parameter domain requires $v_Mv_t-\omega_t^2>0$; fitted values outside this domain are recorded transparently as numerical failures rather than altered by truncation.
+
+Let $\widehat A=n^{-1}\sum_i\partial\widehat\Psi_i/\partial\theta\trans$ and $\widehat B=n^{-1}\sum_i\widehat\Psi_i\widehat\Psi_i\trans$. Within-stratum regression bread blocks are multiplied by $n_t/n$. The cross-product row for stratum $t$ has derivatives
+\[
+-n^{-1}\sum_{i:T_i=t}D_{Mi}\widehat W_{ti},\qquad
+-n^{-1}\sum_{i:T_i=t}D_{Wi}\widehat U_i,
+\]
+with respect to the mediator and corresponding reduced-outcome coefficients, respectively, and derivative $-n_t/n$ with respect to $\omega_t$. It has zero direct derivative with respect to log variances. The baseline-mean block has bread $-I$. Empirical off-diagonal bread entries are retained even where their population expectations vanish. The full meat includes cross-covariance between the marginal regression scores and residual-product moments. The implemented covariance is $\widehat A^{-1}\widehat B\widehat A^{-\mathsf T}/n$.
+
+\paragraph{Conditional asymptotic justification.}
+Assume positive treatment probabilities and nonsingular bread. Also require finite score second moments and fourth error moments, and $v_Mv_t>\omega_t^2$. Each fitted marginal regression is assumed to satisfy the marginal analogues of Conditions~(\ref{cond:score-model})--(\ref{cond:score-derivative}) in Section~\ref{sec:regularity}. Require covariance consistency as in Condition~(\ref{cond:covariance}) for the full augmented stack, retaining its cross-block dependence rather than imposing the independent-error factorization used for the original mediation model. On any fixed finite collection of sensitivity values strictly inside $(-1,1)$, the marginal expansions hold jointly. Taylor expansion of the appended residual-product equations and empirical baseline mean then gives the stacked expansion $\varphi_\theta=-A^{-1}\Psi$. Applying the chain rule gives $\varphi_{g,\rho}=G_\rho\varphi_\theta$ and the displayed sandwich covariance. Positive effect variance is required for a scalar Wald interval. Thus standard estimating-equation and delta-method theory supplies pointwise asymptotic inference under the stated marginal-estimator regularity. The efficiency interpretation is attached to the marginal score blocks; the displayed joint representation characterizes the assembled estimator in the reduced-form working model.
+
+\subsection{Analytic gradients and zero boundaries}
+
+Put $\ell_t=\omega_t/v_M$, $A_t=v_t/v_M$, $d_t=\sqrt{A_t-\ell_t^2}$ and $h_t=\rho_t/\sqrt{1-\rho_t^2}$. Then $b_t=\ell_t-h_td_t$ and
+\begin{align*}
+\frac{\partial b_t}{\partial\omega_t}&=\frac{1+h_t\ell_t/d_t}{v_M},\\
+\frac{\partial b_t}{\partial\log v_M}&=-\ell_t+\frac{h_t(A_t-2\ell_t^2)}{2d_t},\\
+\frac{\partial b_t}{\partial\log v_t}&=-\frac{h_tA_t}{2d_t}.
+\end{align*}
+Thus $d\delta_t=b_t\,d\beta_2+\beta_2\,db_t$. For the total effect,
+\[
+d\tau=d(a_1-a_0)+\bmu_X\trans d(\bm d_1-\bm d_0)
++(\bm d_1-\bm d_0)\trans d\bmu_X.
+\]
+Direct-effect gradients are obtained by subtraction. The code supports separate $(\rho_0,\rho_1)$ even though the figures use their common-value path.
+
+For $\beta_2\ne0$, $\delta_t(\rho_t)=0$ exactly at $r_t=\omega_t/\sqrt{v_Mv_t}$. Its derivatives are $\partial r_t/\partial\omega_t=1/\sqrt{v_Mv_t}$ and $\partial r_t/\partial\log v_M=\partial r_t/\partial\log v_t=-r_t/2$. We form a delta interval for $\operatorname{atanh}(r_t)$ and transform its endpoints back with $\tanh$. At $\beta_2=0$, the complete indirect-effect curve equals zero, producing a set-valued rather than unique effect-zero threshold. The confidence interval for a unique zero boundary addresses uncertainty in the point-estimate threshold, while the statistical-significance boundary along the curve addresses pointwise interval exclusion of zero.
+
+Under the working error independence from regressors, the first-order derivatives of residual second moments with respect to the mean coefficients vanish. Their influence terms reduce to $U^2-v_M$, $1(T=t)(W_t^2-v_t)/p_t$ and $1(T=t)(UW_t-\omega_t)/p_t$. Consequently the OLS-RF and DS-RF zero-boundary estimators share the same first-order residual-moment representation under this model, explaining their close finite-sample boundaries. Density-score gains for the indirect-effect curve arise instead through the pooled mediator treatment coefficient and its joint covariance with the remaining nuisance estimates.
+
+For the contour calibration, Imai's additional shared-confounder variance decomposition expresses $U$ and $E_t$ as linear contributions of a hypothetical pretreatment confounder plus uncorrelated remainder errors, with the corresponding orthogonality to the confounder. It gives $\rho_t^2=R_M^{2*}R_{Y,t}^{2*}$, with the sign specified separately. The outcome fraction refers to the \emph{structural outcome error}, which is distinct from the observed reduced-form outcome residual. The figure uses this moment calibration to map hypothetical latent variance fractions into sensitivity values without requiring a complete latent distribution. Accordingly, its axes are labeled as residual-variance fractions rather than total-variance tilde quantities.
+
+\subsection{Simulation design and verification}
+
+The main article's confounding experiment uses seed 20260918, $n=300$ and 500 replications per innovation-by-correlation cell. For independent verification, the stratum-$t$ covariance is $-0.8+t+\rho_{\rm true}$ and the reduced-outcome variance is $(-0.8+t+\rho_{\rm true})^2+1-\rho_{\rm true}^2$; these determine the population zero boundaries. The original natural effects are retained. Evaluation at the generating correlation and at zero includes valid-fit, paired-fit and all-attempted summaries, with every fit status recorded.
+
+Table~\ref{tab:confounding-simulation} gives performance at the generating correlation; the full-curve and zero-boundary assessments follow below. JOBS II curves are grouped with the application in Section~\ref{sec:jobs}.
+
+\input{results/confounding_simulation_table.tex}
+
+The independent tests compare analytic and numerical gradients for all five effects, verify both exact decompositions and covariance symmetry, reconstruct the Imai covariance identity at known population parameters, and check zero-boundary derivatives and separate-correlation inputs. Output checks independently recompute performance summaries, compare paired replication identifiers, check all attempted/valid denominators, and reconstruct retained OLS fits from the recorded seeds. The existing core estimator is unchanged.
+
+\input{confounding_curve_supplement.tex}

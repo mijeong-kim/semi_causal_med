@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "Please cite the accompanying manuscript when using these replication materials."
+type: software
+title: "Semiparametric Inference and Sensitivity Analysis for Causal Mediation in Linear Models with Unspecified Error Distributions: Replication Materials"
+authors:
+  - family-names: Kim
+    given-names: Mijeong
+    orcid: "https://orcid.org/0000-0002-3578-5413"
+repository-code: "https://github.com/mijeong-kim/semi_causal_med"
+version: "jkss-2026-09-29"
+preferred-citation:
+  type: unpublished
+  title: "Semiparametric Inference and Sensitivity Analysis for Causal Mediation in Linear Models with Unspecified Error Distributions"
+  authors:
+    - family-names: Kim
+      given-names: Mijeong
+      orcid: "https://orcid.org/0000-0002-3578-5413"
+  year: 2026
+  notes: "Unpublished manuscript; JKSS preparation version revised 2026-09-28."

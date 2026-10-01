@@ -1,0 +1,70 @@
+\clearpage
+\section{Null size, power and numerical sensitivity}
+\label{sec:calibrated-power}
+
+\subsection{Original nominal comparison}
+
+Table~\ref{tab:size_power} gives the original nominal comparison at $n=300$ with 1,000 attempts per effect value. The independently calibrated comparison below separates detection gains from differences in attained null size.
+
+\input{results/size_power_table.tex}
+\FloatBarrier
+
+\subsection{Independent null calibration and Huber comparison}
+
+The asymmetric-mixture design uses $n=300$, $\gamma=-0.26$, $\eta=0.8$ and $\beta_2\in\{0,0.1,0.2,0.3,0.4\}$, giving PNIE $=-0.26\beta_2$. All other parameters and the OLS and proposed estimators are unchanged. The design was recorded in \path{POWER_CALIBRATION_PLAN_20260923.md}; all four methods analyze common data within each replication.
+
+\subsubsection*{Huber target and implementation}
+
+The comparators are motivated by \citet{wang2025}, whose data-driven Huber tuning uses a preliminary least-absolute-deviation (LAD) regression. We fit the same mediator and outcome formulas as the main analysis, $M\sim T+X$ and $Y\sim T*M+X$, using \texttt{quantreg::rq} with quantile $0.5$ and method \texttt{br} for the pilot. For each equation, let $r_i^{\rm LAD}$ be the pilot residual and $s=\operatorname{median}(|r_i^{\rm LAD}|)/0.6745$. Huber-FIX sets the raw residual threshold to $k=1.345s$. Huber-SEL minimizes
+\[
+\widehat\tau(k)=
+\frac{n^{-1}\sum_i\min\{(r_i^{\rm LAD})^2,k^2\}}
+     {\{n^{-1}\sum_i\mathbf1(|r_i^{\rm LAD}|\le k)\}^2}
+\]
+over $k=0.20,0.21,\ldots,\operatorname{round}(3s,2)$, following the grid in the authors' public implementation. A zero denominator is assigned infinite objective; an empty grid is a recorded failure. For the chosen threshold, iteratively reweighted least squares minimizes the convex Huber loss, starting from the LAD fit. It stops when the largest coefficient change is below $10^{-10}(1+\|\widehat b\|_\infty)$, with a limit of 500 iterations and an additional absolute mean-score tolerance of $10^{-7}$.
+
+Both comparators target the same PNIE despite the asymmetric errors. To see this, write either regression as $R=\alpha+Z\trans b+\epsilon$, where $Z$ contains all nonconstant regressors, and put $\psi_k(u)=\max\{-k,\min(k,u)\}$. Independence of $\epsilon$ and $Z$ implies that the population Huber equations are solved by slope $b$ and intercept $\alpha+d_k$, where $\E\{\psi_k(\epsilon-d_k)\}=0$. Thus the intercept absorbs a constant location shift and the slopes retain their structural meanings. Consequently, the product of the mediator's treatment slope and the outcome's mediator slope targets $\beta_2\gamma$. The experiment uses this slope-only target, rather than interpreting Huber intercepts as conditional-mean intercepts for direct or total effects.
+
+For the covariance calculation define $C=\Var(Z)$ and $B_k=\E\{\mathbf1(|\epsilon-d_k|<k)\}$. Under the common independent-error law and usual nonsingularity and smoothness conditions, the slope influence function is
+\[
+\operatorname{IF}_b
+=C^{-1}(Z-\E Z)\frac{\psi_k(\epsilon-d_k)}{B_k}.
+\]
+The centered-design slope equations have zero population derivative with respect to the intercept and the threshold: the relevant derivatives factor into $\E(Z-\E Z)=0$ and an error-only expectation. This orthogonality explains why estimating a convergent pilot-based threshold does not contribute a first-order slope term under this model. We evaluate the empirical influence function at the \emph{final Huber residuals}, using the centered empirical design covariance and the fitted inlier fraction. After centering the observation-level influences, PNIE has estimated influence
+\[
+\widehat{\operatorname{IF}}_{\rm PNIE,i}
+=\widehat\gamma_H\widehat{\operatorname{IF}}_{\beta_2,i}
++\widehat\beta_{2,H}\widehat{\operatorname{IF}}_{\gamma,i},
+\qquad
+\widehat{\operatorname{SE}}_H
+=\frac{\{\sum_i\widehat{\operatorname{IF}}_{\rm PNIE,i}^{\,2}\}^{1/2}}{n}.
+\]
+This includes the empirical cross-regression covariance. It is an interaction-adapted comparison, rather than a verbatim reproduction of the simple-mediation Sobel implementation in \citet{wang2025}. Evaluating the score variance at the fitted Huber location also distinguishes this calculation from a pilot-residual variance approximation when errors are asymmetric.
+
+\subsubsection*{Independent calibration and evaluation}
+
+For method $j$, let $Z_{jr}=|\widehat{\operatorname{PNIE}}_{jr}/\widehat{\operatorname{SE}}_{jr}|$. We first generate 5,000 independent null data sets at $\beta_2=0$. Among the $m_j$ numerically valid null fits, order the statistics and select
+\[
+c_j=Z_{j,(\lceil0.95(m_j+1)\rceil)}.
+\]
+We then freeze these four critical values and evaluate $\mathbf1(Z_{jr}>c_j)$ on 1,000 \emph{new} data sets at each of the five effect values. The held-out null is disjoint from calibration and provides the reported type~I error check. The nominal comparison on these same evaluation data uses $z_{0.975}$ for all methods. Master seed 20260923 generates 10,000 distinct task seeds, retained with every fit status and numerical result. The null-calibration target is 5\%; its held-out estimate need not be exactly 0.05 because both stages have Monte Carlo variation. These DGP-specific critical values diagnose whether the original power difference can be attributed to unequal null size. They are not proposed as data-analysis critical values for an unknown error law or as uniform calibration over the composite mediation null. In particular, $\gamma$ is fixed away from zero here, so the joint-zero nonregular case is outside this experiment.
+
+Conditional rejection uses each method's valid-fit denominator. Report-and-reject divides the number of usable rejections by all 1,000 attempts. We additionally compare methods on the common subset where all four fits succeed. These matched comparisons retain the method-specific critical values obtained from calibration. For simulation uncertainty, 1,000 bootstrap replications (seed 20260924) independently resample calibration tasks and evaluation tasks, retaining method pairing within each resample, and recompute the thresholds and rejection rates. The same resampled calibration thresholds are used across the five effect settings within a bootstrap replication. The reported two-stage MCSE is the standard deviation across these replications, and intervals are pointwise percentile intervals for Monte Carlo uncertainty. Binomial MCSEs conditional on the realized thresholds are also retained in the project repository. At cells with no observed failures to reject or no observed paired disagreement, empirical MCSEs and bootstrap intervals can be zero-width; these describe the retained simulation outcomes rather than asserting exact unit power or identical population rejection probabilities.
+
+Tables~\ref{tab:power-critical}--\ref{tab:power-paired} give the calibration cutoffs, held-out rejection rates and common-data contrasts, respectively. They retain both conditional power and all-attempt detection for the weak- and larger-effect comparisons interpreted in the main article.
+
+\input{results/calibrated_power_critical_table.tex}
+\clearpage
+\input{results/calibrated_power_table.tex}
+\clearpage
+\input{results/calibrated_power_paired_table.tex}
+
+The complete records, selected Huber thresholds, warning and failure messages, calibration cutoffs, paired summaries and two-stage bootstrap output are retained in the project repository. Independent checks reconstruct data without the study's generator wrapper, reproduce all four methods on ten prespecified audit tasks, and verify all reported counts and summary denominators. Estimator-level tests compare Huber IRLS with an independent optimizer, check response-shift invariance, and verify that a sufficiently large threshold reproduces OLS coefficients and slope covariance.
+
+\FloatBarrier
+\subsection{Starting-value sensitivity}
+
+Table~\ref{tab:algorithm_sensitivity} varies the coefficient perturbation scale using 300 common data sets per mixture at $n=200$. It records valid-fit estimates and success rates separately; unsuccessful density-score fits remain failures.
+
+\input{results/algorithm_sensitivity_table.tex}
+\FloatBarrier
